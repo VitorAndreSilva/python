@@ -1,28 +1,8 @@
-'''
-from pytube import YouTube
-
-#link = input("Aqui o link do vídeo: ")
-
-def download(link):
-    try:
-        yt = YouTube(link)
-        print("Baixando...")
-        yt.streams.get_highest_resolution().download()
-        print("Download concluído!")
-    except Exception as e:
-        print(f"Erro ao baixar o vídeo: {e}")
-
-link = input("Aqui o link do vídeo: ")
-if "youtu.be/" in link:
-    link = link.replace("youtu.be/", "youtube.com/watch?v=")
-
-download(link)
-'''
-
 import yt_dlp
 
-output_directory = r"D:\DATA"
-#link = input("Aqui o link do vídeo: ")
+output_directory = r"C:\Users\ZETEC\Videos"
+link = input("Aqui o link do vídeo: ")
+'''
 links = [
     "https://youtu.be/qQFgDHnIx_g?si=-FkjZmJzB2ADTWN5",
     "https://youtu.be/KDwLnDKRgpM?si=UDz9_FRt6rB232La",
@@ -151,16 +131,16 @@ links = [
     "https://youtu.be/v0vbOLiKGTI?si=HhNT4ccvEHCXIFnd",
     "https://youtu.be/42Uzv7IEZBw?si=BOj8Gkuf6AJNyTPn"
 ]
+'''
 ydl_opts = {
-    'format': 'bestaudio',# 'bestvideo',
+    'format': 'bestvideo+bestaudio/best',
     'merge_output_format': 'mp4',
     'outtmpl': f'{output_directory}/%(title)s.%(ext)s'
 }
 
 with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-    for link in links:
-        try:
-            ydl.download([link])
-            print("Download concluído!")
-        except Exception as e:
-            print(f"Erro ao baixar o vídeo: {e}")
+    try:
+        ydl.download([link])
+        print("Download concluído!")
+    except Exception as e:
+        print(f"Erro ao baixar o vídeo: {e}")
